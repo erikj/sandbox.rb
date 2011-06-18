@@ -26,14 +26,12 @@ def trollop_example argv
 
 
   if argv.length >= 1
-    puts "TODO: parse argv0: %s" % parse_filename(argv[0]).inspect
+    puts "parse argv0: %s" % parse_filename(argv[0]).inspect
     if argv.length >= 2
-      puts "TODO: parse argv1: %s" % parse_filename(argv[1]).inspect
+      puts "parse argv1: %s" % parse_filename(argv[1]).inspect
     end
   end
 
 end
 
 trollop_example(ARGV) if __FILE__ == $0
-  
-# end
