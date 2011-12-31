@@ -1,14 +1,20 @@
 require 'rubygems'
 require 'mongo'
+require 'md5'
 
 @conn = Mongo::Connection.new
 @db   = @conn['sample-db']
-@coll = @db['test']
+@coll = @db['test2']
 
 # @coll.remove
-3.times do |i|
-  @coll.insert({'a' => i+1})
+
+n = 1500000000
+
+n.times do |i|
+  t = Time.now
+  @coll.insert( { 'a' => i+1, :created_at=>t, :modified_at=>t, :some_md5=>MD5.md5(t.to_s).to_s } )
 end
 
-puts "There are #{@coll.count} records. Here they are:"
-@coll.find.each { |doc| puts doc.inspect }
+puts "#{n} inserts."
+puts "Collection contains #{@coll.count} records."
+# @coll.find.each { |doc| puts doc.inspect }
