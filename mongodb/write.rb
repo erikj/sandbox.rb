@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'mongo'
-require 'md5'
+require 'digest/md5'
 
 @conn = Mongo::Connection.new
 @db   = @conn['sample-db']
@@ -12,7 +12,7 @@ n = 1500000000
 
 n.times do |i|
   t = Time.now
-  @coll.insert( { 'a' => i+1, :created_at=>t, :modified_at=>t, :some_md5=>MD5.md5(t.to_s).to_s } )
+  @coll.insert( { 'a' => i+1, :created_at=>t, :modified_at=>t, :some_md5=>Digest::MD5.hexdigest(t.to_s) } )
 end
 
 puts "#{n} inserts."
