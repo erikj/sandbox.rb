@@ -12,53 +12,8 @@
 
 ## TODO:
 
-### [mongoid](http://mongoid.org/)
+[Mongoid v. MongoMapper](http://www.rubyinside.com/mongoid-vs-mongomapper-two-great-mongodb-libraries-for-ruby-3432.html)
 
-- references
-
-  - [has_many](http://mongoid.org/docs/relations/referenced/1-n.html)
-
-  - [has_one](http://mongoid.org/docs/relations/referenced/1-1.html)
-
-  - [habtm](http://mongoid.org/docs/relations/referenced/n-n.html)
-
-        class Person
-          include Mongoid::Document
-          field :title, type: String
-          has_and_belongs_to_many :tags
-        end
-
-        class Tag
-          include Mongoid::Document
-          field :name, type: String
-          has_and_belongs_to_many :people
-        end
-
-- [relations](http://mongoid.org/docs/relations.html)
-
-- [embeds_many](http://mongoid.org/docs/relations/embedded/1-n.html)
-
-      class Person
-            include Mongoid::Document
-          embeds_many :addresses
-      end
-        
-      class Address
-          include Mongoid::Document
-          embedded_in :person
-      end
-
-- [embeds_one](http://mongoid.org/docs/relations/embedded/1-1.html)
-
-      class Person
-        include Mongoid::Document
-        embeds_one :name
-      end
-        
-      class Name
-        include Mongoid::Document
-        embedded_in :person
-      end
 
 
 ### [mongomapper](http://mongomapper.com/)
@@ -66,3 +21,33 @@
 - [EmbeddedDocument](http://mongomapper.com/documentation/embedded-document.html)
 
 - [Associations](http://mongomapper.com/documentation/plugins/associations.html)
+
+  - one-to-many: `many / belongs_to`
+
+        class Tree; include MongoMapper::Document
+          many :birds
+        end
+        
+        class Bird; include MongoMapper::Document
+          belongs_to :tree
+        end
+
+  - many-to-many `many`
+
+        class Book; include MongoMapper::Document
+          key :author_ids, Array
+          many :authors, :in => :author_ids
+        end
+        
+        class Author; include MongoMapper::Document
+        end
+
+  - one-to-one `one / belongs_to`
+
+        class Employee; include MongoMapper::Document
+          one :desk
+        end
+        
+        class Desk; include MongoMapper::Document
+          belongs_to :employee
+        end
