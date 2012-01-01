@@ -4,6 +4,24 @@
 
 > The philosophy of Mongoid is to provide a familiar API to Ruby developers who have been using Active Record or Data Mapper, while leveraging the power of MongoDB's schemaless and performant document-based design, dynamic queries, and atomic modifier operations.
 
+## [configuration](http://mongoid.org/docs/installation/configuration.html)
+
+> Mongoid configuration can be done through a mongoid.yml that specifies your options and database connections. The simplest configuration is as follows, which uses default options and connects to a single local master db on port 27017:
+
+    host: localhost
+    database: godfather
+
+> You can create your mongoid.yml and place it anywhere you like. Just be sure that on application initialization you do the following:
+
+    Mongoid.load!("path/to/your/mongoid.yml")
+
+If you want to configure Mongoid programatically, this is possible as well.
+
+    Mongoid.configure do |config|
+      config.master = Mongo::Connection.new.db("godfather")
+    end
+
+
 ## [criteria](http://mongoid.org/docs/querying/criteria.html)
 
 > The following are a list of chainable criteria query methods in Mongoid along with their corresponding database selectors or options.
